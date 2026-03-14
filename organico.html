@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz de Estruturas Orgânicas - Modos Duplos</title>
-    
-    <style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz de Estruturas Orgânicas - Modos Duplos</title>
+    
+    <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f4f4f9;
@@ -71,171 +71,171 @@
 </head>
 <body>
 
-    <div class="app-container">
-        <div class="menu-modos">
-            <button id="btn-modo-1" class="btn-modo ativo" onclick="mudarModo(1)">Adivinhar Nome</button>
-            <button id="btn-modo-2" class="btn-modo" onclick="mudarModo(2)">Adivinhar Estrutura</button>
-        </div>
+    <div class="app-container">
+        <div class="menu-modos">
+            <button id="btn-modo-1" class="btn-modo ativo" onclick="mudarModo(1)">Adivinhar Nome</button>
+            <button id="btn-modo-2" class="btn-modo" onclick="mudarModo(2)">Adivinhar Estrutura</button>
+        </div>
 
-        <h2 id="titulo-pergunta">Qual é o nome desta estrutura?</h2>
-        
-        <img id="imagem-molecula" src="" alt="Estrutura Molecular">
+        <h2 id="titulo-pergunta">Qual é o nome desta estrutura?</h2>
+        
+        <img id="imagem-molecula" src="" alt="Estrutura Molecular">
 
-        <div id="botoes-container"></div>
-        <div id="mensagem"></div>
-    </div>
+        <div id="botoes-container"></div>
+        <div id="mensagem"></div>
+    </div>
 
-    <script>
-        const listaDeCompostos = [
-            { nome: "Ácido Fórmico", smiles: "C(=O)O" },
-            { nome: "Ácido Acético", smiles: "CC(=O)O" },
-            { nome: "Ácido Carbônico", smiles: "C(=O)(O)O" },
-            { nome: "Ácido Malônico", smiles: "O=C(O)CC(=O)O" },
-            { nome: "Ácido Succínico", smiles: "O=C(O)CCC(=O)O" },
-            { nome: "Ácido Fumárico", smiles: "O=C(O)/C=C/C(=O)O" },
-            { nome: "Ácido Maleico", smiles: "O=C(O)/C=C\\C(=O)O" },
-            { nome: "Ácido Oxálico", smiles: "O=C(O)C(=O)O" },
-            { nome: "Ácido Tartárico", smiles: "O=C(O)C(O)C(O)C(=O)O" },
-            { nome: "Ácido Glutárico", smiles: "O=C(O)CCCC(=O)O" },
-            { nome: "Ácido Salicílico", smiles: "O=C(O)c1ccccc1O" },
-            { nome: "Ácido Benzóico", smiles: "O=C(O)c1ccccc1" },
-            { nome: "Ácido Acrílico", smiles: "C=CC(=O)O" },
-            { nome: "Ácido Pícrico", smiles: "Oc1c(cc(cc1[N+]([O-])=O)[N+]([O-])=O)[N+]([O-])=O" },
-            { nome: "Fenol", smiles: "Oc1ccccc1" },
-            { nome: "Glicerol", smiles: "OCC(O)CO" },
-            { nome: "Etileno Glicol", smiles: "OCCO" },
-            { nome: "Hidroquinona", smiles: "Oc1ccc(O)cc1" },
-            { nome: "p-Cresol", smiles: "Cc1ccc(O)cc1" },
-            { nome: "Resorcinol", smiles: "Oc1cccc(O)c1" },
-            { nome: "Tolueno", smiles: "Cc1ccccc1" },
-            { nome: "Anilina", smiles: "Nc1ccccc1" },
-            { nome: "Isopreno", smiles: "CC(=C)C=C" },
-            { nome: "Etanol", smiles: "CCO" }, 
-            { nome: "Ureia", smiles: "NC(=O)N" },
-            { nome: "Hidrazina", smiles: "NN" },
-            { nome: "Quinona", smiles: "O=C1C=CC(=O)C=C1" },
-            { nome: "Propanona", smiles: "CC(=O)C" }, 
-            { nome: "t-Butil Mercaptana", smiles: "CC(C)(C)S" },
-            { nome: "Xileno", smiles: "Cc1ccccc1C" },
-            { nome: "Eteno", smiles: "C=C" },
-            { nome: "Pirrol", smiles: "c1cc[nH]c1" },
-            { nome: "Furano", smiles: "c1ccoc1" },
-            { nome: "Piridina", smiles: "c1ccncc1" },
-            { nome: "Benzeno", smiles: "c1ccccc1" },
-            { nome: "Acetileno", smiles: "C#C" },
-            { nome: "Antraceno", smiles: "c1ccc2cc3ccccc3cc2c1" },
-            { nome: "Naftaleno", smiles: "c1ccc2ccccc2c1" },
-            { nome: "Fenantreno", smiles: "c1ccc2c(c1)ccc3ccccc32" },
-            { nome: "Gama-Butirolactona", smiles: "O=C1CCCO1" },
-            { nome: "Gama-Butirolactama", smiles: "O=C1CCCN1" },
-            { nome: "Glicose", smiles: "C(C1C(C(C(C(O1)O)O)O)O)O" },
-            { nome: "Peróxido de Benzoíla", smiles: "O=C(OOC(=O)c1ccccc1)c1ccccc1" },
-            { nome: "Cumeno", smiles: "CC(C)c1ccccc1" }
-        ];
+    <script>
+        const listaDeCompostos = [
+            { nome: "Ácido Fórmico", smiles: "C(=O)O" },
+            { nome: "Ácido Acético", smiles: "CC(=O)O" },
+            { nome: "Ácido Carbônico", smiles: "C(=O)(O)O" },
+            { nome: "Ácido Malônico", smiles: "O=C(O)CC(=O)O" },
+            { nome: "Ácido Succínico", smiles: "O=C(O)CCC(=O)O" },
+            { nome: "Ácido Fumárico", smiles: "O=C(O)/C=C/C(=O)O" },
+            { nome: "Ácido Maleico", smiles: "O=C(O)/C=C\\C(=O)O" },
+            { nome: "Ácido Oxálico", smiles: "O=C(O)C(=O)O" },
+            { nome: "Ácido Tartárico", smiles: "O=C(O)C(O)C(O)C(=O)O" },
+            { nome: "Ácido Glutárico", smiles: "O=C(O)CCCC(=O)O" },
+            { nome: "Ácido Salicílico", smiles: "O=C(O)c1ccccc1O" },
+            { nome: "Ácido Benzóico", smiles: "O=C(O)c1ccccc1" },
+            { nome: "Ácido Acrílico", smiles: "C=CC(=O)O" },
+            { nome: "Ácido Pícrico", smiles: "Oc1c(cc(cc1[N+]([O-])=O)[N+]([O-])=O)[N+]([O-])=O" },
+            { nome: "Fenol", smiles: "Oc1ccccc1" },
+            { nome: "Glicerol", smiles: "OCC(O)CO" },
+            { nome: "Etileno Glicol", smiles: "OCCO" },
+            { nome: "Hidroquinona", smiles: "Oc1ccc(O)cc1" },
+            { nome: "p-Cresol", smiles: "Cc1ccc(O)cc1" },
+            { nome: "Resorcinol", smiles: "Oc1cccc(O)c1" },
+            { nome: "Tolueno", smiles: "Cc1ccccc1" },
+            { nome: "Anilina", smiles: "Nc1ccccc1" },
+            { nome: "Isopreno", smiles: "CC(=C)C=C" },
+            { nome: "Etanol", smiles: "CCO" }, 
+            { nome: "Ureia", smiles: "NC(=O)N" },
+            { nome: "Hidrazina", smiles: "NN" },
+            { nome: "Quinona", smiles: "O=C1C=CC(=O)C=C1" },
+            { nome: "Propanona", smiles: "CC(=O)C" }, 
+            { nome: "t-Butil Mercaptana", smiles: "CC(C)(C)S" },
+            { nome: "Xileno", smiles: "Cc1ccccc1C" },
+            { nome: "Eteno", smiles: "C=C" },
+            { nome: "Pirrol", smiles: "c1cc[nH]c1" },
+            { nome: "Furano", smiles: "c1ccoc1" },
+            { nome: "Piridina", smiles: "c1ccncc1" },
+            { nome: "Benzeno", smiles: "c1ccccc1" },
+            { nome: "Acetileno", smiles: "C#C" },
+            { nome: "Antraceno", smiles: "c1ccc2cc3ccccc3cc2c1" },
+            { nome: "Naftaleno", smiles: "c1ccc2ccccc2c1" },
+            { nome: "Fenantreno", smiles: "c1ccc2c(c1)ccc3ccccc32" },
+            { nome: "Gama-Butirolactona", smiles: "O=C1CCCO1" },
+            { nome: "Gama-Butirolactama", smiles: "O=C1CCCN1" },
+            { nome: "Glicose", smiles: "C(C1C(C(C(C(O1)O)O)O)O)O" },
+            { nome: "Peróxido de Benzoíla", smiles: "O=C(OOC(=O)c1ccccc1)c1ccccc1" },
+            { nome: "Cumeno", smiles: "CC(C)c1ccccc1" }
+        ];
 
-        let compostoAtual = null;
-        let modoAtual = 1; // 1 = Adivinhar Nome, 2 = Adivinhar Estrutura
+        let compostoAtual = null;
+        let modoAtual = 1; // 1 = Adivinhar Nome, 2 = Adivinhar Estrutura
 
-        function embaralhar(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-            return array;
-        }
+        function embaralhar(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
 
-        function sortearComposto() {
-            let novo = listaDeCompostos[Math.floor(Math.random() * listaDeCompostos.length)];
-            while (compostoAtual && novo.nome === compostoAtual.nome) {
-                novo = listaDeCompostos[Math.floor(Math.random() * listaDeCompostos.length)];
-            }
-            return novo;
-        }
+        function sortearComposto() {
+            let novo = listaDeCompostos[Math.floor(Math.random() * listaDeCompostos.length)];
+            while (compostoAtual && novo.nome === compostoAtual.nome) {
+                novo = listaDeCompostos[Math.floor(Math.random() * listaDeCompostos.length)];
+            }
+            return novo;
+        }
 
-        function mudarModo(novoModo) {
-            modoAtual = novoModo;
-            
-            // Atualiza os botões do menu
-            document.getElementById('btn-modo-1').className = modoAtual === 1 ? 'btn-modo ativo' : 'btn-modo';
-            document.getElementById('btn-modo-2').className = modoAtual === 2 ? 'btn-modo ativo' : 'btn-modo';
-            
-            carregarQuiz();
-        }
+        function mudarModo(novoModo) {
+            modoAtual = novoModo;
+            
+            // Atualiza os botões do menu
+            document.getElementById('btn-modo-1').className = modoAtual === 1 ? 'btn-modo ativo' : 'btn-modo';
+            document.getElementById('btn-modo-2').className = modoAtual === 2 ? 'btn-modo ativo' : 'btn-modo';
+            
+            carregarQuiz();
+        }
 
-        function carregarQuiz() {
-            const divMensagem = document.getElementById('mensagem');
-            divMensagem.innerText = "";
-            divMensagem.className = "";
+        function carregarQuiz() {
+            const divMensagem = document.getElementById('mensagem');
+            divMensagem.innerText = "";
+            divMensagem.className = "";
 
-            compostoAtual = sortearComposto();
-            
-            // Separa 1 opção certa e 3 opções erradas completas (nome + smiles)
-            let outrasOpcoes = embaralhar(listaDeCompostos.filter(c => c.nome !== compostoAtual.nome)).slice(0, 3);
-            let opcoesFinais = embaralhar([compostoAtual, ...outrasOpcoes]);
+            compostoAtual = sortearComposto();
+            
+            // Separa 1 opção certa e 3 opções erradas completas (nome + smiles)
+            let outrasOpcoes = embaralhar(listaDeCompostos.filter(c => c.nome !== compostoAtual.nome)).slice(0, 3);
+            let opcoesFinais = embaralhar([compostoAtual, ...outrasOpcoes]);
 
-            const divBotoes = document.getElementById('botoes-container');
-            const imgPrincipal = document.getElementById('imagem-molecula');
-            const titulo = document.getElementById('titulo-pergunta');
-            
-            divBotoes.innerHTML = ""; 
+            const divBotoes = document.getElementById('botoes-container');
+            const imgPrincipal = document.getElementById('imagem-molecula');
+            const titulo = document.getElementById('titulo-pergunta');
+            
+            divBotoes.innerHTML = ""; 
 
-            if (modoAtual === 1) {
-                // MODO 1: Mostra a Imagem e pergunta o Nome
-                imgPrincipal.style.display = 'block';
-                divBotoes.className = '';
-                titulo.innerText = "Qual é o nome desta estrutura?";
-                
-                const smilesCodificado = encodeURIComponent(compostoAtual.smiles);
-                imgPrincipal.src = `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/smiles/${smilesCodificado}/PNG?record_type=2d&image_size=large`;
+            if (modoAtual === 1) {
+                // MODO 1: Mostra a Imagem e pergunta o Nome
+                imgPrincipal.style.display = 'block';
+                divBotoes.className = '';
+                titulo.innerText = "Qual é o nome desta estrutura?";
+                
+                const smilesCodificado = encodeURIComponent(compostoAtual.smiles);
+                imgPrincipal.src = `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/smiles/${smilesCodificado}/PNG?record_type=2d&image_size=large`;
 
-                opcoesFinais.forEach(opcao => {
-                    const btn = document.createElement('button');
-                    btn.className = 'btn-opcao-texto';
-                    btn.innerText = opcao.nome;
-                    btn.onclick = () => verificarResposta(opcao.nome);
-                    divBotoes.appendChild(btn);
-                });
+                opcoesFinais.forEach(opcao => {
+                    const btn = document.createElement('button');
+                    btn.className = 'btn-opcao-texto';
+                    btn.innerText = opcao.nome;
+                    btn.onclick = () => verificarResposta(opcao.nome);
+                    divBotoes.appendChild(btn);
+                });
 
-            } else {
-                // MODO 2: Mostra o Nome e pergunta a Imagem
-                imgPrincipal.style.display = 'none';
-                divBotoes.className = 'grid-imagens';
-                titulo.innerText = `Qual destas estruturas é o(a) ${compostoAtual.nome}?`;
+            } else {
+                // MODO 2: Mostra o Nome e pergunta a Imagem
+                imgPrincipal.style.display = 'none';
+                divBotoes.className = 'grid-imagens';
+                titulo.innerText = `Qual destas estruturas é o(a) ${compostoAtual.nome}?`;
 
-                opcoesFinais.forEach(opcao => {
-                    const btn = document.createElement('button');
-                    btn.className = 'btn-opcao-img';
-                    
-                    const img = document.createElement('img');
-                    const smilesCod = encodeURIComponent(opcao.smiles);
-                    img.src = `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/smiles/${smilesCod}/PNG?record_type=2d&image_size=small`;
-                    img.alt = "Opção de Estrutura";
+                opcoesFinais.forEach(opcao => {
+                    const btn = document.createElement('button');
+                    btn.className = 'btn-opcao-img';
+                    
+                    const img = document.createElement('img');
+                    const smilesCod = encodeURIComponent(opcao.smiles);
+                    img.src = `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/smiles/${smilesCod}/PNG?record_type=2d&image_size=small`;
+                    img.alt = "Opção de Estrutura";
 
-                    btn.appendChild(img);
-                    btn.onclick = () => verificarResposta(opcao.nome);
-                    divBotoes.appendChild(btn);
-                });
-            }
-        }
+                    btn.appendChild(img);
+                    btn.onclick = () => verificarResposta(opcao.nome);
+                    divBotoes.appendChild(btn);
+                });
+            }
+        }
 
-        function verificarResposta(nomeSelecionado) {
-            const divMensagem = document.getElementById('mensagem');
-            const botoes = document.querySelectorAll('#botoes-container button');
-            
-            botoes.forEach(btn => btn.disabled = true);
+        function verificarResposta(nomeSelecionado) {
+            const divMensagem = document.getElementById('mensagem');
+            const botoes = document.querySelectorAll('#botoes-container button');
+            
+            botoes.forEach(btn => btn.disabled = true);
 
-            if (nomeSelecionado === compostoAtual.nome) {
-                divMensagem.innerText = "Acertou! Carregando o próximo...";
-                divMensagem.className = "sucesso";
-                setTimeout(carregarQuiz, 1500);
-            } else {
-                divMensagem.innerText = "Incorreto. Tente novamente!";
-                divMensagem.className = "erro";
-                botoes.forEach(btn => btn.disabled = false);
-            }
-        }
+            if (nomeSelecionado === compostoAtual.nome) {
+                divMensagem.innerText = "Acertou! Carregando o próximo...";
+                divMensagem.className = "sucesso";
+                setTimeout(carregarQuiz, 1500);
+            } else {
+                divMensagem.innerText = "Incorreto. Tente novamente!";
+                divMensagem.className = "erro";
+                botoes.forEach(btn => btn.disabled = false);
+            }
+        }
 
-        window.onload = carregarQuiz;
-    </script>
+        window.onload = carregarQuiz;
+    </script>
 </body>
 </html>
